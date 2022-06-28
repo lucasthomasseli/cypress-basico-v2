@@ -1,6 +1,9 @@
 /// <reference types="Cypress" />
 
 describe('Central de Atendimento ao Cliente TAT', function() {
+    
+    const threems = 3000
+
     beforeEach(function() {
         cy.visit('./src/index.html')
     })
@@ -10,6 +13,8 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     it('Preenche os campos obrigatórios e envia o formulário', function() {
+        cy.clock()
+
         cy.get('#firstName').type('Walmyr')
         cy.get('#lastName').type('Filho')
         cy.get('#email').type('walmyr.filho@hotmail.com')
@@ -17,24 +22,42 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.contains('button', 'Enviar').click()
         
         cy.get('.success').should('be.visible') // Verifica se a mensagem de sucesso está aparecendo.
+
+        cy.tick(threems)
+
+        cy.get('.success').should('not.be.visible')
     })
 
     it('Exibir mensagem de erro ao não preencher campos obrigatórios', function() {
+        cy.clock()
+        
         cy.contains('button', 'Enviar').click()  
         cy.get('.error').should('be.visible')
+
+        cy.tick(threems)
+
+        cy.get('.error').should('not.be.visible')
     })
 
     it('Envia o formulário com sucesso usando um comando customizado', function() {
+        cy.clock()
+        
         cy.fillMandatoryFieldsAndSubmit()
 
         cy.get('.success').should('be.visible')
+
+        cy.tick(threems)
+
+        cy.get('.success').should('not.be.visible')
     })
 
-    it('Selecionar o Produto (Youtube) pelo texto', function() {
-        cy.get('#product')
-            .select('YouTube') //Texto
-            .should('have.value', 'youtube')
-
+    Cypress._.times(5, function() {
+        it('Selecionar o Produto (Youtube) pelo texto', function() {
+            cy.get('#product')
+                .select('YouTube') //Texto
+                .should('have.value', 'youtube')
+    
+        })
     })
 
     it('Selecionar o Produto (Mentoria) por seu valor', function() {
