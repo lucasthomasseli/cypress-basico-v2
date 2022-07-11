@@ -54,8 +54,8 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     Cypress._.times(5, function() {
         it('Selecionar o Produto (Youtube) pelo texto', function() {
             cy.get('#product')
-                .select('YouTube') //Texto
-                .should('have.value', 'youtube')
+              .select('YouTube') //Texto
+              .should('have.value', 'youtube')
     
         })
     })
@@ -157,5 +157,26 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         /*
         Explicação na Seção 8 - Aula 34.
         */
+    })
+
+    it('exibe e esconde as mensagens de sucesso e erro usando o .invoke', function() {
+        cy.get('.success')
+          .should('not.be.visible')
+          .invoke('show')
+          .should('be.visible')
+          .and('contain', 'Mensagem enviada com sucesso.')
+          .invoke('hide')
+          .should('not.be.visible')
+
+        cy.get('.error')
+          .should('not.be.visible')
+          .invoke('show')
+          .should('be.visible')
+          .and('contain', 'Valide os campos obrigatórios')
+          .invoke('hide')
+          .should('not.be.visible')
+          /*
+          Explicação desse test case na "Seção 12 - Aula 50".
+          */
     })
   })
