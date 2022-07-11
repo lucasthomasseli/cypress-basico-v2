@@ -179,4 +179,45 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           Explicação desse test case na "Seção 12 - Aula 50".
           */
     })
+
+    it('preenche a area de texto usando o comando invoke', function() {
+        const longText = Cypress._.repeat('012345679', 20) /* Repete 20 vezes os caracteres do primeiro argumento */
+        
+        cy.get('#open-text-area')
+          /*.type(longText, { delay: 0 })*/
+          .invoke('val', longText)
+          .should('have.value', longText)
+        /*
+        Explicação na "Seção 12 - Aula 52"
+        */
+    })
+
+    it.only('faz uma requisição HTTP na aplicação do CAC TAT', function() {
+        
+        //PRIMEIRA FORMA DE ESCREVER O TESTE:
+        cy.request({
+            method: 'GET',
+            url: 'https://cac-tat.s3.eu-central-1.amazonaws.com/index.html'
+        }).then(function(response) {
+            const { status, statusText, body } = response
+                expect(status).to.equal(200)
+                expect(statusText).to.equal('OK')
+                expect(body).contain('CAC TAT')
+        })
+        
+        /*
+        //SEGUNDA FORMA DE ESCREVER O TESTE:
+        cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
+          .should(function(response) {
+            const { status, statusText, body } = response
+            expect(status).to.equal(200)
+            expect(statusText).to.equal('OK')
+            expect(body).to.include('CAC TAT')
+          })  
+        */
+
+        /*
+        Explicação na Seção 12 - Aula 54
+        */
+    })
   })
