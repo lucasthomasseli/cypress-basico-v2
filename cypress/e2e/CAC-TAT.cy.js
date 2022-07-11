@@ -192,7 +192,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         */
     })
 
-    it.only('faz uma requisição HTTP na aplicação do CAC TAT', function() {
+    it('faz uma requisição HTTP na aplicação do CAC TAT', function() {
         
         //PRIMEIRA FORMA DE ESCREVER O TESTE:
         cy.request({
