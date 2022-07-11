@@ -221,7 +221,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         */
     })
 
-    it.only('Teste para visualizar e apresentar o gato escondido na aplicação CAC TAT', function() {
+    it('Teste para visualizar e apresentar o gato escondido na aplicação CAC TAT', function() {
         cy.get('#cat')
           .should('not.be.visible')
           .invoke('show')
