@@ -220,4 +220,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         Explicação na Seção 12 - Aula 54
         */
     })
+
+    it.only('Teste para visualizar e apresentar o gato escondido na aplicação CAC TAT', function() {
+        cy.get('#cat')
+          .should('not.be.visible')
+          .invoke('show')
+          .should('be.visible')
+    })
   })
