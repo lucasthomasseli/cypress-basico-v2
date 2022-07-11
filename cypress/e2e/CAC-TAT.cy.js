@@ -226,5 +226,14 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .should('not.be.visible')
           .invoke('show')
           .should('be.visible')
+
+        cy.get('#title')
+          .invoke('text', 'CAT TAT')
+        cy.get('#subtitle')
+          .invoke('text', 'Eu amo gatos!')  
+
+        /* 
+        Explicação na Seção 13 - Aula 56
+        */
     })
   })
